@@ -36,7 +36,27 @@ int main() {
             mostrar_tarefas_cadastradas();
             break;
         case 3:
-            buscar_por_tarefa();
+           void buscar_por_tarefa(Lista *l, const char *tarefa) {
+    printf("Digite a tarefa para busca: ");
+    char tarefa_busca[100];
+    scanf(" %[^\n]", tarefa_busca);
+
+    printf("\nResultados da busca por \"%s\":\n", tarefa_busca);
+
+    int encontradas = 0;
+
+    for (int i = 0; i < l->posicaoAtual; i++) {
+        if (strstr(l->tarefas[i].descricao, tarefa_busca) != NULL) {
+            printf("%d. %s - %s\n", i + 1, l->tarefas[i].descricao,
+                   l->tarefas[i].concluida ? "Concluída" : "Pendente");
+            encontradas = 1;
+        }
+    }
+
+    if (!encontradas) {
+        printf("Nenhuma tarefa encontrada com o termo \"%s\".\n", tarefa_busca);
+    }
+}
             break;
         case 4:
             editar_informacoes_de_uma_tarefa();
